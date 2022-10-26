@@ -2,6 +2,7 @@ package com.spring.webmvc.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,20 +20,21 @@ public class DataBaseConfig {
 
     @Value("${local.db.password}")
     private String password;
+
     @Value("${local.db.url}")
     private String url;
+
 
 //  Bean -> java  public (class) (id)(){}
     @Bean
     public DataSource dataSource(){
         HikariConfig config = new HikariConfig();
+
         config.setUsername(username);
         config.setPassword(password);
         config.setJdbcUrl(url);
         config.setDriverClassName("org.mariadb.jdbc.Driver");
 
-
         return new HikariDataSource(config);
-
     }
 }
