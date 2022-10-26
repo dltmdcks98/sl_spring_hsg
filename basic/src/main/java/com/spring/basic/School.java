@@ -1,5 +1,8 @@
 package com.spring.basic;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class School{
 
     private Human student;
