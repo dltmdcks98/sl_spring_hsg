@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spring.basic.OfficeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-26T02:35:51" hostname="DESKTOP-NM4O27H" time="0.079">
+  <properties/>
+  <testcase name="test()" classname="com.spring.basic.OfficeTest" time="0.079"/>
+  <system-out><![CDATA[?쉶?궗?뿉?꽌 ?닲?돩湲?
+kim
+?븰援먯뿉?꽌 ?닲?돩湲곗쨷~~
+kim
+吏묒뿉?꽌 ?궙?옞
+kim
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
