@@ -2,7 +2,7 @@ package com.spring.basic;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Kim implements Human{
     @Override
     public void breath() {
