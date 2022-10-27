@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 //SQL Mapper 인터페이스
+//역할 : 게시물 데이터를 저장, 조회, 수정, 삭제하는 책임을 부여받음
 @Mapper
 public interface BoardRepository {
 
