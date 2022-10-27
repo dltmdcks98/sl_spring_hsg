@@ -1,6 +1,7 @@
 package com.spring.webmvc.board.repository;
 
 import com.spring.webmvc.board.domain.Board;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,6 +31,21 @@ class BoardRepositoryTest {
 
             repository.save(b);
         }
+    }
+
+//    단언(Assertion) : 강하게 주장하다
+//    테스트 이름은 단언하게 작성해야한다.
+    @Test
+    @DisplayName("300번 게시글을 조회했을 때 제목이 꿀꿀이 300이어야 한다.")
+    void findOneTest(){
+//        테스트 기법 given, when, then
+
+//        given : 테스트시 주어지는 변동 데이터
+        Long boardNo = 300L;
+//        when : 테스트 실제 상황
+        Board board = repository.findOne(boardNo);
+//        then : 테스트 예상 결과 assertEquals("내 예상 결과",실제 값)
+        assertEquals("꿀꿀이300",board.getTitle());
     }
 
 }
