@@ -5,8 +5,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+
 
 //테스트시 스프링의 컨테이너를 사용할 것이라는 뜻
 //=> 의존 객체를 스프링에게 주입받아 사용할 것이다.
@@ -49,6 +55,59 @@ class BoardRepositoryTest {
         assertTrue(board.getViewCnt()==0);
         assertNotEquals("대길이200",board.getWriter());
         assertNotNull(board);
+    }
+
+    @Test
+    @DisplayName("전체 게시물을 조회했을 때리스트의 크기가 300이어야한다.")
+    void findAllTest(){
+//         given
+//        when
+        List<Board> boardList = repository.findAll();
+        for (Board board : boardList) {
+            System.out.println(board.toString());
+        }
+//        then
+        assertEquals(300,boardList.size());
+    }
+
+    @Test
+    @DisplayName("298번의 글제목을 파파리치, 내용을 랄랄랄로로 수정")
+//    실제 DB값을 변경하지 않기 위함
+    @Transactional
+    @Rollback
+    void modifyTest(){
+//        given
+        Board board = new Board();
+        board.setBoardNo(298L);
+        board.setTitle("파파라치");
+        board.setContent("랄랄랄로");
+
+//        when
+        boolean flag = repository.modify(board);
+        Board foundBoard = repository.findOne(board.getBoardNo());
+
+//        then
+        assertTrue(flag);
+        assertEquals("파파라치",foundBoard.getTitle());
+        assertEquals("랄랄랄로",foundBoard.getContent());
+
+    }
+
+    @Test
+    @DisplayName("300번 게시물을 삭제하고 다시 조회했을 때 null값이 나와야함")
+    @Transactional
+    @Rollback
+    void removeTest(){
+//        given
+        Long boardNo=300L;
+
+//        when
+        boolean flag = repository.remove(boardNo);
+        Board board = repository.findOne(boardNo);
+
+//        then
+        assertTrue(flag);
+        assertNull(board);
     }
 
 }
