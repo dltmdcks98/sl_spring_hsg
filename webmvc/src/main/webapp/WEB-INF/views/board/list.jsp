@@ -7,6 +7,9 @@
 <title></title>
 </head>
 <body>
-  ${bList.get(0)}
+<%--for (Board b : bList) 와 같음 --%>
+  <c:forEach var="b" items="${bList}">
+      <li> ${b.writer} </li>
+  </c:forEach>
 </body>
 </html>
