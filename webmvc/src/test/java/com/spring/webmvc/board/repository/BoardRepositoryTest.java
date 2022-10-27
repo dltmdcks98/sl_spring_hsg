@@ -12,12 +12,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+import static java.lang.System.*;
 
 //테스트시 스프링의 컨테이너를 사용할 것이라는 뜻
 //=> 의존 객체를 스프링에게 주입받아 사용할 것이다.
 @SpringBootTest
-
 class BoardRepositoryTest {
 //    Board interface에서 Ctrl+shift+t
 
@@ -37,6 +36,7 @@ class BoardRepositoryTest {
 
             repository.save(b);
         }
+
     }
 
 //    단언(Assertion) : 강하게 주장하다
