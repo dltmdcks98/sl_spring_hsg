@@ -11,7 +11,7 @@ import java.util.Locale;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+//@Builder
 public class Board {
     //   DB에서 값이 안넘어오는 값은 "0"이 아니라 null이어서 참조형 타입으로 설정
     private Long boardNo;
