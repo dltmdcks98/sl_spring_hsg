@@ -46,6 +46,9 @@ class BoardRepositoryTest {
         Board board = repository.findOne(boardNo);
 //        then : 테스트 예상 결과 assertEquals("내 예상 결과",실제 값)
         assertEquals("꿀꿀이300",board.getTitle());
+        assertTrue(board.getViewCnt()==0);
+        assertNotEquals("대길이200",board.getWriter());
+        assertNotNull(board);
     }
 
 }
