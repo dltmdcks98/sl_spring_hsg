@@ -1,10 +1,12 @@
 package com.spring.webmvc.board.repository;
 
 import com.spring.webmvc.board.domain.Board;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 //SQL Mapper 인터페이스
+@Mapper
 public interface BoardRepository {
 
 //    게시글 목록 조회
