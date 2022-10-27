@@ -9,8 +9,9 @@ import java.util.List;
 @Mapper
 public interface BoardRepository {
 
+//    interface 에서는 public abstract는 생략가능
 //    게시글 목록 조회
-    List<Board> findAll();
+     List<Board> findAll();
 //    게시글 상세 단일 조회
     Board findOne(Long boardNo);
 //    게시글 쓰기
