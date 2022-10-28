@@ -78,7 +78,7 @@ public class BoardController {
         boolean flag = service.insert(board);
 //        model에 담으면 redirect 하면 msg가 죽는다.
 //        model.addAttribute("msg","insert-success");
-        ra.addAttribute("msg","insert-success");
+        ra.addFlashAttribute("msg","insert-success");
 
         return flag ? "redirect:/board/list" : "redirect:/";
     }
