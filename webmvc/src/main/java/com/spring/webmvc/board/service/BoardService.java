@@ -33,16 +33,33 @@ public class BoardService {
         List<Board> boardList = repository.findAll();
 
 
-        for (Board b : boardList) {
-            subStringTitle(b);
-
-            convertDateFormat(b);
-        }
+        processBoardList(boardList);
 
         return boardList;
     }
 
-        //            날짜 포맷팅 처리
+    private void processBoardList(List<Board> boardList) {
+        for (Board b : boardList) {
+            subStringTitle(b);
+            convertDateFormat(b);
+            isNewArticle(b);
+        }
+    }
+
+    private void isNewArticle(Board b) {
+        //            신규 게시물 new 마크 처리(10분 이내 작성된 게시물)
+        long regDate = b.getRegDate().getTime();//게시물 작성 시간(밀리초로 받아옴)
+        long nowDate = System.currentTimeMillis();//현재 시간(밀리초)
+
+        long diff = nowDate - regDate;//작성 후 지난 시간(밀리초)
+        long limit = 10 * 60 * 1000; //10분을 밀리초로 변환
+
+        if(diff <= limit){
+            b.setNewArticle(true);
+        }
+    }
+
+    //            날짜 포맷팅 처리
     private void convertDateFormat(Board b) {
         Date regDate = b.getRegDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd a hh:mm");
