@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.websocket.server.PathParam;
@@ -56,11 +57,25 @@ public class BoardController {
     @GetMapping("/content/{bno}")
 //    @PathVariable 뒤의 변수명이 넘어오는 변수명과 같으면 설정할 것은 없지만, 변경하려면 @PathVariable("변수")로 받는다.
     public String content(@PathVariable("bno") Long boardNo, Model model){
-        log.info("/board/content/{} GET",boardNo);
+        log.info("/board/content/{} - GET",boardNo);
 
         model.addAttribute("b", service.getDetail(boardNo));
         return "board/detail";
     }
 
+//    게시물 쓰기 화면 요청
+    @GetMapping("/write")
+    public String write(){
+        log.info("/board/write GET");
+        return "board/write";
+    }
+//    게시물 등록 요청
+    @PostMapping("/write")
+    public String write(Board board){
+        log.info("/board/write POST - {}", board);
+
+        boolean flag = service.insert(board);
+        return flag ? "redirect:/board/list" : "redirect:/";
+    }
 }
 

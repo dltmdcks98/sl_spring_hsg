@@ -16,6 +16,7 @@
 
     <select id="findAll" resultMap="boardMap">
         SELECT * FROM tbl_board
+        ORDER BY board_no DESC
     </select>
 
 <!--   파라미터가 기본 타입이면 변수값 그대로 사용 -->
