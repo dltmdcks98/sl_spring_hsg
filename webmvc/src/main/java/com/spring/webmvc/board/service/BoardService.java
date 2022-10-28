@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 // 역할 : 컨트롤러와 레파지토리 사이 중간 잡다한 처리를 담당
@@ -30,21 +32,36 @@ public class BoardService {
     public List<Board> getList(){
         List<Board> boardList = repository.findAll();
 
-//        게시물 제목 줄임 처리
-//        글 제목이 6글자 이상이면 6글자까지만 보여주고 뒤에 ...처리
+
         for (Board b : boardList) {
-            String title = b.getTitle();
-            if(title.length() > 6){
-                String shortTitle = title.substring(0,6) +"...";
-                b.setShortTitle(shortTitle);
-            } else {
-                b.setShortTitle(title);
-            }
+            subStringTitle(b);
+
+            convertDateFormat(b);
         }
 
         return boardList;
     }
-//    상세 조회 중간처리
+
+        //            날짜 포맷팅 처리
+    private void convertDateFormat(Board b) {
+        Date regDate = b.getRegDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd a hh:mm");
+        b.setPrettierDate(sdf.format(regDate));
+    }
+
+    //        게시물 제목 줄임 처리
+//        글 제목이 6글자 이상이면 6글자까지만 보여주고 뒤에 ...처리
+    private void subStringTitle(Board b) {
+        String title = b.getTitle();
+        if(title.length() > 6){
+            String shortTitle = title.substring(0,6) +"...";
+            b.setShortTitle(shortTitle);
+        } else {
+            b.setShortTitle(title);
+        }
+    }
+
+    //    상세 조회 중간처리
     public Board getDetail(Long boardNo){
         Board board = repository.findOne(boardNo);
         return board;

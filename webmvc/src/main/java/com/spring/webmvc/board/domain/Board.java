@@ -23,6 +23,7 @@ public class Board {
 
 //    커스텀 필드
     private String shortTitle;//줄임 제목
+    private String prettierDate;//포맷팅한 날짜 문자열
 
     private Board(Builder builder) {
         this.boardNo = builder.boardNo;
