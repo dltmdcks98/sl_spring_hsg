@@ -29,6 +29,19 @@ public class BoardService {
 //    전체 조회 중간처리
     public List<Board> getList(){
         List<Board> boardList = repository.findAll();
+
+//        게시물 제목 줄임 처리
+//        글 제목이 6글자 이상이면 6글자까지만 보여주고 뒤에 ...처리
+        for (Board b : boardList) {
+            String title = b.getTitle();
+            if(title.length() > 6){
+                String shortTitle = title.substring(0,6) +"...";
+                b.setShortTitle(shortTitle);
+            } else {
+                b.setShortTitle(title);
+            }
+        }
+
         return boardList;
     }
 //    상세 조회 중간처리

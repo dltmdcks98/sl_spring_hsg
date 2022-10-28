@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
@@ -71,11 +72,14 @@ public class BoardController {
     }
 //    게시물 등록 요청
     @PostMapping("/write")
-    public String write(Board board, Model model){
+    public String write(Board board, RedirectAttributes ra){
         log.info("/board/write POST - {}", board);
 
         boolean flag = service.insert(board);
-        model.addAttribute("msg","insert-success");
+//        model에 담으면 redirect 하면 msg가 죽는다.
+//        model.addAttribute("msg","insert-success");
+        ra.addAttribute("msg","insert-success");
+
         return flag ? "redirect:/board/list" : "redirect:/";
     }
 }

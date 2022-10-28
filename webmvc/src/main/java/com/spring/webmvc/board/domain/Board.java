@@ -21,6 +21,9 @@ public class Board {
     private int viewCnt;
     private Date regDate;
 
+//    커스텀 필드
+    private String shortTitle;//줄임 제목
+
     private Board(Builder builder) {
         this.boardNo = builder.boardNo;
         this.writer = builder.writer;
