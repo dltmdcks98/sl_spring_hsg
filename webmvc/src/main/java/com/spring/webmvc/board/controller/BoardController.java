@@ -7,8 +7,10 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -48,6 +50,16 @@ public class BoardController {
 
         model.addAttribute("bList",boardList);
         return "board/list";
+    }
+
+//    게시물 상세 조회 요청 처리
+    @GetMapping("/content/{bno}")
+//    @PathVariable 뒤의 변수명이 넘어오는 변수명과 같으면 설정할 것은 없지만, 변경하려면 @PathVariable("변수")로 받는다.
+    public String content(@PathVariable("bno") Long boardNo, Model model){
+        log.info("/board/content/{} GET",boardNo);
+
+        model.addAttribute("b", service.getDetail(boardNo));
+        return "board/detail";
     }
 
 }
